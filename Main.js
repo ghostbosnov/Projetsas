@@ -73,9 +73,9 @@ function HomePage() {
                 break;
             case 4: voteCandidat();
                 break;
-            case 5:
+            case 5: modifCandidat();
                 break;
-            case 6:
+            case 6: 
                 break;
             case 7:
                 break;
@@ -137,15 +137,15 @@ function addCandidats(cin, lname, fname, partiPolitique, age, electeurs) {
 
 }
 function afficheListe() {
-    let n = +prompt(` 
-        ############################################
-        -----------LISTE DES CANDIDATS-----------
-        ############################################
-        1. Liste triée par ordre décroissant 
-        2. Filtrer par parti politique
-        3. Quitter au menu principale
-        "############################################
- `);
+    let n
+    console.log(`############################################`)
+    console.log(`-----------LISTE DES CANDIDATS-----------`)
+    console.log(`############################################`)
+    console.log(`1. Liste triée par ordre décroissant`)
+    console.log(`2. Filtrer par parti politique`)
+    console.log(`3. Quitter au menu principale`)
+    console.log(`############################################`)
+    n = +prompt(`entrer votre choix :`)
     if (n == 1) {
         let swap;
         for (let i = 0; i < candidats.length; i++) {
@@ -163,7 +163,7 @@ function afficheListe() {
         let parti = prompt(`entrer la parti désigné :`)
         let tabtrie = [];
         for (i = 0; i < candidats.length; i++) {
-            if (candidats[i].partiPolitique.toLowerCase ()=== parti.toLowerCase()) {
+            if (candidats[i].partiPolitique.toLowerCase() === parti.toLowerCase()) {
                 tabtrie.push(candidats[i])
             }
 
@@ -173,9 +173,17 @@ function afficheListe() {
     else HomePage();
 }
 function voteCandidat() {
+    let candidat = {
+        cin: "",
+        lname: "",
+        fname: "",
+        partiPolitique: ""
+        , age: 0,
+        electeurs: []
+    }
     let y = prompt(`-----saisis ton CIN :-----`);
     for (i = 0; i < candidats.length; i++) {
-        for (j = 0; j < electeurs.length; j++) {
+        for (j = 0; j < candidats.electeurs.length; j++) {
             if (y == candidats[i].electeurs[j]) {
                 console.log(`Vous avez déja Vous avez déjà voté et vous n’avez pas le droit de modifier votre vote ni de voter à nouveau`)
                 break;
@@ -192,4 +200,31 @@ function voteCandidat() {
         }
     }
 }
-
+function modifCandidat() {
+    let m;
+    console.log(`############################################`)
+    console.log(`--- Modifier les informations d'un candidat :---`)
+    console.log(`############################################`)
+    console.log(`1. Modifier le parti politique d'un candidat`)
+    console.log(`2.Modifier l'âge d'un candidat.`)
+    console.log(`3. Quitter au menu principale`)
+    console.log(`############################################`)
+    m = +prompt(`entrer un valeur pour choisir :`)
+    let cin = prompt(`entrer le CIN du candidat que vous voulez modifier ses informations`);
+    switch (m) {
+        case 1: for (i = 0; i < candidats.length; i++) {
+            if (cin == candidats[i].cin) {
+                candidats[i].partiPolitique = prompt(`entrer une parti politique`);
+            }
+        }
+        break ;
+        case 2: for (i = 0; i < candidats.length; i++) {
+            if (cin == candidats[i].cin) {
+                candidats[i].age = +prompt(`entrer le nouvaue age`);
+            }
+        }
+        break ;
+        default: console.log(`aucun candidat qui correspand a CIN :${cin}`)
+        break ;
+    }
+}
