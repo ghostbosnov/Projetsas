@@ -182,8 +182,8 @@ function voteCandidat() {
         electeurs: []
     }
     let y = prompt(`-----saisis ton CIN :-----`);
-    for (i = 0; i < candidats.length; i++) {
-        for (j = 0; j < candidats.electeurs.length; j++) {
+    for (let i = 0; i < candidats.length; i++) {
+        for (let j = 0; j < candidats[i].electeurs.length; j++) {
             if (y == candidats[i].electeurs[j]) {
                 console.log(`Vous avez déja Vous avez déjà voté et vous n’avez pas le droit de modifier votre vote ni de voter à nouveau`)
                 break;
@@ -191,11 +191,11 @@ function voteCandidat() {
             else {
                 let ccin = prompt(`entrer la cin du candidat`)
                 if (ccin == candidats[i].cin) {
-                    candidats.push(candidat.electeurs);
+                    candidats.push(candidat.electeurs);         //probléme de mise en place du code //
                     break;
                 }
                 else
-                    console.log(`Aucun candidat ne posséde cet CIN :`);
+                    console.log(`Aucun candidat ne posséde cet CIN : ${ccin}`);
             }
         }
     }
@@ -210,21 +210,25 @@ function modifCandidat() {
     console.log(`3. Quitter au menu principale`)
     console.log(`############################################`)
     m = +prompt(`entrer un valeur pour choisir :`)
-    let cin = prompt(`entrer le CIN du candidat que vous voulez modifier ses informations`);
+    if (m<=3 && m>=1){
+        let cin = prompt(`entrer le CIN du candidat que vous voulez modifier ses informations: `);
     switch (m) {
         case 1: for (i = 0; i < candidats.length; i++) {
             if (cin == candidats[i].cin) {
-                candidats[i].partiPolitique = prompt(`entrer une parti politique`);
+                candidats[i].partiPolitique = prompt(`entrer une parti politique: `);
+                console.log(`la parti politique du candidat ayant comme cin ${cin} est modifiée`)
             }
         }
         break ;
         case 2: for (i = 0; i < candidats.length; i++) {
             if (cin == candidats[i].cin) {
-                candidats[i].age = +prompt(`entrer le nouvaue age`);
+                candidats[i].age = +prompt(`entrer le nouvaue age: `);
+                console.log(`l'age du candidat ayant comme cin ${cin} est modifiée `)
+
             }
         }
         break ;
-        default: console.log(`aucun candidat qui correspand a CIN :${cin}`)
-        break ;
-    }
+    }}
+else console.log(`Choix invalid`)
+    
 }
