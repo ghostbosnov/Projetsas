@@ -203,16 +203,16 @@ function addCandidats() {
             electeurs: [],
         }
         console.log(`------candidat n° ${i + 1} ------`)
-        candidat.cin = prompt(`-----> entrer le cin du candidat ${i + 1} : `);
+        candidat.cin = prompt(`-----> entrer le cin du candidat ${i + 1} : `).toLowerCase();
         for (j = 0; j < candidats.length; j++) {
             if (candidat.cin == candidats[j].cin) {
                 console.log(` -----Cette CIN est déja utilisé------ `)
                 return;
             }
         };
-        candidat.nom = prompt(`-----> entrer le nom du candidat ${i + 1} : `);
-        candidat.prenom = prompt(`-----> entrer le prenom du candidat ${i + 1} : `);
-        candidat.partiPolitique = prompt(`-----> entrer le parti politique du candidat ${i + 1} : `);
+        candidat.nom = prompt(`-----> entrer le nom du candidat ${i + 1} : `).toLowerCase();
+        candidat.prenom = prompt(`-----> entrer le prenom du candidat ${i + 1} : `).toLowerCase();
+        candidat.partiPolitique = prompt(`-----> entrer le parti politique du candidat ${i + 1} : `).toLowerCase();
         if (candidat.partiPolitique == " " || candidat.partiPolitique == "") {
             candidat.partiPolitique = "independant";
         }
@@ -327,7 +327,7 @@ function modifCandidat() {
         switch (m) {
             case 1: for (i = 0; i < candidats.length; i++) {
                 if (cin == candidats[i].cin) {
-                    candidats[i].partiPolitique = prompt(`entrer une parti politique: `);
+                    candidats[i].partiPolitique = prompt(`entrer une parti politique: `).toLowerCase();
                     console.log(`la parti politique du candidat ayant comme cin ${cin} est modifiée`)
                 }
             }
@@ -342,16 +342,16 @@ function modifCandidat() {
                 break;
         }
     }
-    else console.log(`Choix invalid`)
+    else console.log(`------Choix invalide-----`)
 
 }
 function deleteCandidat() {
-    let cin = prompt(`enter le cin du candidat à supprimer`)
+    let cin = prompt(`-----> enter le cin du candidat à supprimer : `)
     let existe = false;
     for (let i = 0; i < candidats.length; i++) {
         if (cin == candidats[i].cin) {
             candidats.splice(i, 1);
-            console.log(`le candidat ayant comme cin ${cin} a été supprimé`);
+            console.log(`----le candidat ayant comme cin ${cin} a été supprimé----`);
             existe = true;
             break;
         }
@@ -447,9 +447,7 @@ function candidatParParti() {
     console.log(`|------------------------------------------------------------------|`);
     console.log(`|------le nombre total des votes du parti "${n}" est : ${nbr}------|`);
     console.log(`|------------------------------------------------------------------|`);
-
 }
-
 function votesParParti() {
     let total = 0;
     let n = prompt(`---->entrer la parti politique pour voire le nombre de votes : `).toLowerCase();
@@ -461,5 +459,14 @@ function votesParParti() {
     console.log(`|------------------------------------------------------------------|`);
     console.log(`|----le nombre total des votes du parti "${n}" est : ${total}------|`);
     console.log(`|------------------------------------------------------------------|`);
-
 };
+function votesParparti2(){
+  for(let i=0;i<candidats.length;i++){
+    let tempParti=candidats[i].partiPolitique.toLowerCase()
+    for(j=i+1;j<candidats.length;j++){
+        if(tempParti == candidats[j].partiPolitique){
+
+        }
+    }
+  } 
+}
